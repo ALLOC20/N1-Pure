@@ -32,6 +32,16 @@ echo "DISTRIB_SOURCECODE='lede'" >>package/base-files/files/etc/openwrt_release
 rm -rf package/luci-app-amlogic
 git clone https://github.com/ophub/luci-app-amlogic.git package/luci-app-amlogic
 #
+# Add luci-app-netdata
+rm -rf package/luci-app-netdata
+git clone https://github.com/muink/luci-app-netdata.git package/luci-app-netdata
+#
+# Add passwall2
+rm -rf mytemp/passwall2
+rm -rf package/luci-app-passwall2
+git clone https://github.com/xiaorouji/openwrt-passwall2.git mytemp/passwall2
+mv mytemp/passwall2/luci-app-passwall2 package/luci-app-passwall2
+#
 # Apply patch
 # git apply ../config/patches/{0001*,0002*}.patch --directory=feeds/luci
 #
