@@ -228,9 +228,12 @@ on:
           - ALLOC
       multithreads:
         description: "multithreads"
-        required: true
-        default: true
-        type: boolean
+        required: false
+        default: "full"
+        type: choice
+        options:
+          - "full"
+          - "single"
 
 env:
   FEEDS_CONF: config/${{ inputs.source_branch }}/feeds.conf.default
@@ -358,7 +361,7 @@ jobs:
         id: compile
         run: |
           cd openwrt/
-          if [[ ${{ inputs.multithreads }} ]]; then
+          if [[ "${{ inputs.multithreads }}" == "full" ]]; then
               echo -e "$(nproc) thread compile"
               make -j$(($(nproc) + 1)) V=s
           else
