@@ -358,10 +358,11 @@ jobs:
         id: compile
         run: |
           cd openwrt/
-          if [[ ${{ inputs.multithreads }} ]]; then
+          if [[ ${ inputs.multithreads } ]]; then
               echo -e "$(nproc) thread compile"
               make -j$(($(nproc) + 1)) V=s
           else
+              echo -e "1 thread compile"
               make -j1 V=s
           fi
           echo "status=success" >> ${GITHUB_OUTPUT}
